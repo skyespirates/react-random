@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import Gate from "./material-ui/Gate";
+import App from "./todo-app/App";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Gate />
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
