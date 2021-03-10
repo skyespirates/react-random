@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import UjiState from "./uji-state/UjiState";
+import Gate from "./material-ui/Gate";
 
 ReactDOM.render(
   <React.StrictMode>
-    <UjiState />
+    <Gate />
   </React.StrictMode>,
   document.getElementById("root")
 );
