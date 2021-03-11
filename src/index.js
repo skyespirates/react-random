@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./todo-app/App";
+import App from "./tours/App";
 
 ReactDOM.render(
   <React.StrictMode>
