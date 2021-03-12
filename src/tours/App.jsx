@@ -1,22 +1,44 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Tours from "./Tours";
 import {
   CssBaseline,
   AppBar,
   Toolbar,
   Typography,
-  Container,
-  Grid,
-  Card,
-  CardMedia,
-  CardContent,
-  CardActions,
-  Button,
+  CircularProgress,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import useStyles from "./styles";
+const url = "https://course-api.com/react-tours-project";
 function App() {
   const classes = useStyles();
-  const card = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const [loading, setLoading] = useState(true);
+  const [tours, setTours] = useState([]);
+  const deleteItem = (id) => {
+    const Tours = tours.filter((tour) => tour.id !== id);
+    setTours(Tours);
+  };
+  const fetchData = async () => {
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      setTours(data);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+  if (loading) {
+    return (
+      <div className={classes.loading}>
+        <CircularProgress />;
+      </div>
+    );
+  }
+
   return (
     <>
       <CssBaseline />
@@ -24,48 +46,20 @@ function App() {
         <Toolbar>
           <MenuIcon edge="start" />
           <Typography variant="h6" noWrap>
-            tours
+            Tours
           </Typography>
         </Toolbar>
       </AppBar>
-      <Container className={classes.container} maxWidth="md">
-        <Typography
-          className={classes.header}
-          variant="h3"
-          align="center"
-          gutterBottom
-          noWrap
-        >
-          Tours
-        </Typography>
-        <Grid container justify="center" spacing={4}>
-          {card.map((card) => (
-            <Grid key={card} item xs={12} sm={6} md={4}>
-              <Card className={classes.card}>
-                <CardMedia
-                  className={classes.cardMedia}
-                  image="https://picsum.photos/200/300"
-                  title="image title"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5">
-                    heading
-                  </Typography>
-                  <Typography>This is media card</Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small" color="primary">
-                    view
-                  </Button>
-                  <Button size="small" color="default">
-                    show
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
+      <Typography
+        className={classes.header}
+        variant="h3"
+        align="center"
+        gutterBottom
+        noWrap
+      >
+        Tours
+      </Typography>
+      <Tours tours={tours} deleteItem={deleteItem} />
     </>
   );
 }

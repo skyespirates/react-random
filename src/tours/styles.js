@@ -1,11 +1,21 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
+  headline: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  loading: {
+    height: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   header: {
     fontWeight: "500",
-  },
-  container: {
-    border: "1px solid blue",
+    margin: "50px auto",
+    width: "200px",
+    borderBottom: "5px solid rgb(63,81,181)",
   },
   icon: {
     marginRight: theme.spacing(2),
